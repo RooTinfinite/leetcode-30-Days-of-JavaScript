@@ -1,8 +1,22 @@
-const expect = (val) => {
-    const throwError = (error) => { throw new Error(error)};
 
+type ToBeOrNotToBe = {
+    toBe: (val: any) => boolean;
+    notToBe: (val: any) => boolean;
+};
+
+function expect(val: any): ToBeOrNotToBe {
     return {
-        toBe: (val2)=> val2 === val || throwError("Not Equal"),
-        notToBe: (val2)=> val2 !== val || throwError("Equal"),
+        toBe: (val2: any): boolean => {
+            if (val !== val2) {
+                throw new Error("Not Equal");
+            }
+            return true;            
+        },
+        notToBe: (val2: any): boolean => {
+            if (val === val2) {
+                throw new Error("Equal");
+            }
+            return true;            
+        }
     };
-}
+};

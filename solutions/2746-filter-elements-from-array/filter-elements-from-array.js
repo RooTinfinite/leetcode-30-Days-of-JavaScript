@@ -1,6 +1,9 @@
 var filter = function(arr, fn) {
-    return arr.reduce((acc, curr, i) => {
-    fn(curr,i) && acc.push(curr) 
-    return acc
-    } ,[])
+    const result = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (fn(arr[i], i)) {
+            result.push(arr[i]);
+        }
+    }
+    return result
 };
